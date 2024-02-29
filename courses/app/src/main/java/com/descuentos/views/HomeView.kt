@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerIcon.Companion.Text
 import androidx.compose.ui.unit.dp
+import com.descuentos.components.MainButton
 import com.descuentos.components.MainTextField
 import com.descuentos.components.SpaceH
 
@@ -52,7 +53,7 @@ fun ContentHomeView(paddingValues: PaddingValues){
             .padding(paddingValues)
             .padding(10.dp)
             .fillMaxSize(),
-        verticalArrangement =  Arrangement.Center,
+        //verticalArrangement =  Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
           //Text( text="Hola")
@@ -64,5 +65,13 @@ fun ContentHomeView(paddingValues: PaddingValues){
         MainTextField(value = precio, onValueChanget = { precio = it} , label = "Precio")
         SpaceH()
         MainTextField(value = descuento, onValueChanget ={descuento = it} , label = "Descuento" )
+        SpaceH(10.dp)
+        MainButton(text = "Generar Descuento") {
+
+        }
+        SpaceH()
+        MainButton(text = "Limpiar", color=Color.Red) {
+            
+        }
     }
 }

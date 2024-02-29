@@ -26,14 +26,3 @@ fun SpaceW(size: Dp = 10.dp){
     Spacer(modifier = Modifier.width(size))
 }
 
-@Composable
-fun MainTextField(value : String , onValueChanget: (String) -> Unit, label: String){
-    OutlinedTextField(
-         value = value,
-         onValueChange = onValueChanget ,
-         label = { Text(text = label) },
-         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-         modifier = Modifier.fillMaxWidth()
-             .padding(horizontal = 30.dp)
-     )
-}
