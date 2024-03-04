@@ -28,11 +28,12 @@ import com.descuentos.components.MainButton
 import com.descuentos.components.MainTextField
 import com.descuentos.components.SpaceH
 import com.descuentos.components.TwoCards
+import com.descuentos.viewModels.CalcularViewModel1
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeView(){
+fun HomeView(viewModel1: CalcularViewModel1){
   Scaffold( topBar = {
        CenterAlignedTopAppBar(title = {
           Text(text = "Aplicacion con Descuentos", color = Color.White)
@@ -43,13 +44,13 @@ fun HomeView(){
      }
     ) {
 
-      ContentHomeView(it)
+      ContentHomeView(it, viewModel1)
   }
 }
 
 
 @Composable
-fun ContentHomeView(paddingValues: PaddingValues){
+fun ContentHomeView(paddingValues: PaddingValues , viewModel1: CalcularViewModel1){
     Column(
         modifier = Modifier
             .padding(paddingValues)
@@ -75,11 +76,11 @@ fun ContentHomeView(paddingValues: PaddingValues){
         MainTextField(value = descuento, onValueChanget ={descuento = it} , label = "Descuento" )
         SpaceH(10.dp)
         MainButton(text = "Generar Descuento"){
-            if( precio != "" && descuento != ""){
-                precioDescuento = calcularPrecio(precio.toDouble(), descuento.toDouble())
-                totalDescuento = calcularDescuento(precio.toDouble(), descuento.toDouble())
-            }else {
-               showAlert = true
+           val result = viewModel1.calcular(precio,descuento)
+            showAlert = result.second.second;
+            if ( !showAlert){
+                precioDescuento = result.first
+                totalDescuento = result.second.first
             }
         }
         SpaceH()
@@ -102,13 +103,3 @@ fun ContentHomeView(paddingValues: PaddingValues){
 }
 
 
-fun calcularPrecio( precio: Double, descuento: Double): Double {
-    val res = precio - calcularDescuento(precio, descuento)
-    return kotlin.math.round(res * 100) / 100.0
-
-}
-
-fun calcularDescuento(precio: Double, descuento: Double): Double{
-  val res = precio  * (1 - descuento / 100)
-    return kotlin.math.round(res * 100) / 100.0
-}
