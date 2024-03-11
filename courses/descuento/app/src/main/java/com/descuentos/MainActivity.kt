@@ -13,12 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.descuentos.ui.theme.DescuentosTheme
 import com.descuentos.viewModels.CalcularViewModel1
+import com.descuentos.viewModels.CalcularViewModel2
 import com.descuentos.views.HomeView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewModel: CalcularViewModel1 by viewModels()
+        val viewModel: CalcularViewModel2 by viewModels()
         setContent {
             DescuentosTheme {
                 // A surface container using the 'background' color from the theme
